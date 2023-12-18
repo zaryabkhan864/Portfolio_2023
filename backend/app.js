@@ -30,9 +30,11 @@ app.use('/api/v1', auth);
 app.use(errorMiddleware);
 
 //static files 
-app.use(express.static(path.join(__dirname,"./frontend/build")));
-app.get("*",function(req,res){
-    res.sendFile(path.join(__dirname,"./frontend/build/index.html"))
+if (process.env.NODE_ENV == "production") {
+    app.use(express.static(path.join(__dirname, "./frontend/build")))
+}
+app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "./frontend/build/index.html"));
 })
 const server = app.listen(process.env.PORT, () => {
     console.log(`Server on port  ${process.env.PORT} in ${process.env.NODE_ENV} mode`);
