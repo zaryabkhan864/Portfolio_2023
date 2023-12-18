@@ -14,7 +14,15 @@ process.on('uncaughtException', (err) => {
     process.exit(1);
 }
 )
-dotenv.config({ path: 'backend/config/config.env' });
+
+
+if (process.env.NODE_ENV !== "PRODUCTION") {
+    dotenv.config({ path: 'backend/config/config.env' });
+}
+
+
+
+
 // Connect to database
 connectDB();
 app.use(express.json());
@@ -29,13 +37,7 @@ app.use('/api/v1', auth);
 // Middleware to handle errors
 app.use(errorMiddleware);
 
-//static files 
-if (process.env.NODE_ENV == "production") {
-    app.use(express.static(path.join(__dirname, "./frontend/build")))
-}
-app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "./frontend/build/index.html"));
-})
+
 const server = app.listen(process.env.PORT, () => {
     console.log(`Server on port  ${process.env.PORT} in ${process.env.NODE_ENV} mode`);
 })
