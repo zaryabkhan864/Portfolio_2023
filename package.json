@@ -6,8 +6,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node backend/app.js",
-  "dev": "concurrently \"npm start\"\"npm run client\" ",
-    "prod": "set NODE_ENV=PRODUCTION& nodemon backend/app.js",
+    "prod": "concurrently \"npm start\"\"npm run client\" ",
+    "dev": "set NODE_ENV=DEVELOPMENT& nodemon backend/app.js",
     "seeder": "node backend/seeder/seeder.js"
   },
   "author": "zaryabkhan864",
